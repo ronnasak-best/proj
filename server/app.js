@@ -1,8 +1,22 @@
 const express = require ('express')
 const path = require ('path')
 const cors = require ('cors')
+const dbConfig = require ('./config/db')
+const mongoose = require ('mongoose')
 
 
+// Connecting MongDB Database
+mongoose.Promise = global.Promise;
+mongoose.connect(dbConfig.db, {
+    useNewUrlParser: true,
+    // useUnifiedTopology: true
+}).then(() => {
+    console.log('Database successfully connected');
+}, 
+    error => {
+        console.log('Could not connect to database: ' + error)
+    }
+)
 
 const app = express()
 app.use(express.json())
