@@ -4,7 +4,8 @@ const cors = require ('cors')
 const dbConfig = require ('./config/db')
 const mongoose = require ('mongoose')
 
-
+//import routes
+const productRoutes = require ('./routes/products')
 // Connecting MongDB Database
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.db, {
@@ -24,7 +25,8 @@ app.use(express.urlencoded({extended: false}))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'public')))
 
-
+//Routes
+app.use('/api/product', productRoutes)
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
